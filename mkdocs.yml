@@ -1,0 +1,12 @@
+site_name: Radiant Logic DevOps
+site_url: https://devops.radiantlogic.com
+nav:
+- Home: index.md
+- Deployment: deployment.md
+
+theme: 
+features:
+- navigation.expand
+
+
+
