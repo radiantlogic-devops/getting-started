@@ -2,11 +2,22 @@ site_name: Radiant Logic DevOps
 site_url: https://devops.radiantlogic.com
 nav:
 - Home: index.md
-- Deployment: deployment.md
+- Kubernetes: kubernetes.md
+- Docker: docker.md
 
-theme: 
-features:
-- navigation.expand
+theme:
+  name: material
+  logo: r1small.jpg
+  nav_style: light
+  navigation_depth: 5
+  features:
+    - navigation.expand
 
+markdown_extensions:
+  - pymdownx.critic
+  - pymdownx.magiclink
+  - pymdownx.highlight
+  - pymdownx.superfences
+  - pymdownx.inlinehilite
 
 
