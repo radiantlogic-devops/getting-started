@@ -2,8 +2,9 @@ site_name: Radiant Logic DevOps
 site_url: https://devops.radiantlogic.com
 nav:
 - Home: index.md
-- Kubernetes: kubernetes.md
 - Docker: docker.md
+- Kubernetes: kubernetes.md
+- Helm: helm.md
 
 theme:
   name: material
