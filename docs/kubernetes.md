@@ -48,7 +48,7 @@ Before installing RadiantOne nodes, make sure the ZooKeeper service is running. 
 2. Click the Stateful Set corresponding to your ZooKeeper deployment.
 3. In the Pods section, click zk-0 (in this example the name used in the ZooKeeper yaml is “zk”).
 <br>
-<img src="img/kubernetesdashboard.jpg" alt="Kubernetes Dashboard" style="height: 250px; width:1000px;"/>
+<img src="/img/kubernetesdashboard.jpg" alt="Kubernetes Dashboard" style="height: 250px; width:1000px;"/>
 <br>
 4. Click ->EXEC, this opens a new browser window.
 5. In the SHELL window, run this command: 
