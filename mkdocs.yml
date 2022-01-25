@@ -1,19 +1,30 @@
+# Project information
 site_name: Radiant Logic DevOps
 site_url: https://devops.radiantlogic.com
-nav:
-- Home: index.md
-- Docker: docker.md
-- Kubernetes: kubernetes.md
-- Helm: helm.md
 
+# Repository
+repo_name: radiantlogic-devops/getting-started
+repo_url: https://github.com/radiantlogic-devops
+
+# Copyright
+copyright: Copyright &copy; 2022 Radiant Logic, Inc.
+
+# Theme
 theme:
   name: material
   logo: r1small.jpg
   nav_style: light
   navigation_depth: 5
   features:
-    - navigation.expand
+    #- navigation.expand
+    - navigation.sections
+    - navigation.top
+    - navigation.tabs
+    - search.highlight
+    - search.share
+    - search.suggest    
 
+# Extensions
 markdown_extensions:
   - pymdownx.critic
   - pymdownx.magiclink
@@ -21,4 +32,10 @@ markdown_extensions:
   - pymdownx.superfences
   - pymdownx.inlinehilite
 
+# Page Tree
+nav:
+- Home: index.md
+- Docker: docker.md
+- Kubernetes: kubernetes.md
+- Helm: helm.md
 
