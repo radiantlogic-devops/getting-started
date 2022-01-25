@@ -1,4 +1,4 @@
-# helm
+# Helm
 Helm charts for FID and Zookeeper deployment
 
 [Helm](https://helm.sh) must be installed to use the charts.  Please refer to
