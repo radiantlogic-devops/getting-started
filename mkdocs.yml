@@ -38,4 +38,5 @@ nav:
 - Docker: docker.md
 - Kubernetes: kubernetes.md
 - Helm: helm.md
+- Terraform: terraform.md
 
