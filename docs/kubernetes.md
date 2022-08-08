@@ -60,15 +60,15 @@ export JAVA_HOME=/opt/radiantone/rli-zookeeper-external/jdk/jre/;/opt/radiantone
 {==Note - Use Shift+Insert to Paste.==}<br><br>
 The returned value should indicate “Mode: follower” or “Mode: Leader”. The ZooKeeper in the following example is a follower node.
 <br>
-<img src="img/followerzk.jpg" alt="Follower ZK Node" style="height: 150px; width:1000px;"/>
+<img src="../img/followerzk.jpg" alt="Follower ZK Node" style="height: 150px; width:1000px;"/>
 <br>
  
 6. Close the Browser tab and go back to the Kubernetes Dashboard.
 7. Repeat steps 3-6 for the other ZooKeeper nodes: zk-1 and zk-2. Following this example, one should be a follower node and one should be a leader node. The results are shown below.
 <br>
-<img src="img/followerzk2.jpg" alt="Follower ZK Node 2" style="height: 150px; width:1000px;"/>
+<img src="../img/followerzk2.jpg" alt="Follower ZK Node 2" style="height: 150px; width:1000px;"/>
 <br>
-<img src="img/leaderzk.jpg" alt="Leader ZK Node" style="height: 125px; width:1000px;"/>
+<img src="../img/leaderzk.jpg" alt="Leader ZK Node" style="height: 125px; width:1000px;"/>
 <br>
  
 ##### Checking the ZooKeeper Service via HTTP
@@ -84,7 +84,7 @@ When “ruok” returns “error” : null, this means the ZooKeeper node is run
 <br>
 When “is_read_only” returns “read_only” : false, this means the ZooKeeper node is not in a read-only state. If a ZooKeeper node is in a read-only state, something is wrong and the RadiantOne nodes will not allow any write operations during this time. Most likely ZooKeeper has lost the quorum and can’t communicate with more than half of the other ZooKeeper nodes.
 <br>
-<img src="img/zookeepercheck.jpg" alt="ZooKeeper State Check" style="height: 150px; width:500px;"/>
+<img src="../img/zookeepercheck.jpg" alt="ZooKeeper State Check" style="height: 150px; width:500px;"/>
 <br>
 
 #### RadiantOne Nodes
@@ -108,7 +108,7 @@ After the RadiantOne nodes are deployed, you can view the services from the Kube
 
 1. From the Kubernetes web dashboard, navigate to Discovery and Load Balancing -> Services.
 <br>
-<img src="img/kubernetesservices.jpg" alt="Kubernetes Services" style="height: 350px; width:1000px;"/>
+<img src="../img/kubernetesservices.jpg" alt="Kubernetes Services" style="height: 350px; width:1000px;"/>
 <br>
 The external endpoints, which point to the AWS Elastic Load Balancer (ELB) that is in front of the RadiantOne services, are shown for the RadiantOne Control Panel service 
 (<node_name>-cp). There are four external endpoints configured. Two point to the Control Panel (one is for the non-ssl port and the other is for the ssl port). Two point to the RadiantOne FID web services (SCIM, DSML/SPML, ADAP) ports which are required by the RadiantOne Main Control Panel -> Directory Browser tab. 
@@ -135,7 +135,7 @@ kubectl exec -it -n demo myfid-0 -- vdsconfig.sh export-ldif -basedn o=local -ld
 ```
 The local.ldif file is created at /opt/radiantone/vds/vds_server/ldif/export/ by default.
 <br>
-<img src="img/ldifexport.jpg" alt="LDIF Export Example" style="height: 150px; width:600px;"/>
+<img src="../img/ldifexport.jpg" alt="LDIF Export Example" style="height: 150px; width:600px;"/>
 <br>
 
 ### Kubernetes Web Dashboard
@@ -145,11 +145,11 @@ To access the shell from the Kubernetes web dashboard:
 
 2. Select the RadiantOne pod you want to manage (e.g. myfid-0) and click ->EXEC. The shell window opens.
 <br>
-<img src="img/fidnode.jpg" alt="FID Node" style="height: 300px; width:1000px;"/>
+<img src="../img/fidnode.jpg" alt="FID Node" style="height: 300px; width:1000px;"/>
 <br> 
 3. Go to the /vds folder to access the file system of RadiantOne. The example below depicts how to navigate to the log files below /vds/vds_server/logs.
 <br>
-<img src="img/r1filesystem.jpg" alt="RadiantOne File System" style="height: 150px; width:1000px;"/>
+<img src="../img/r1filesystem.jpg" alt="RadiantOne File System" style="height: 150px; width:1000px;"/>
 <br> 
 
 ### Enabling FIPS-Mode
@@ -178,7 +178,7 @@ RadiantOne configuration can be migrated from one environment (e.g. dev/qa) to a
 5. Click SCALE.
 6. Enter 1 for the (total) number of nodes the RadiantOne cluster should have. In the example shown below, there are currently 3 nodes in the RadiantOne cluster and 1 node is desired.
 <br>
-<img src="img/scaledown.jpg" alt="Scale Down" style="height: 300px; width:500px;"/>
+<img src="../img/scaledown.jpg" alt="Scale Down" style="height: 300px; width:500px;"/>
 <br> 
  
 7. Click OK. Kubernetes scales down to one node.
@@ -210,13 +210,13 @@ To add nodes to the existing RadiantOne FID cluster:
 <br>
 {==Note – make sure you are in the correct Namespace!==}
 <br>
-<img src="img/statefulsets.jpg" alt="Stateful Sets" style="height: 400px; width:1000px;"/>
+<img src="../img/statefulsets.jpg" alt="Stateful Sets" style="height: 400px; width:1000px;"/>
 <br>
  
 3. Click  SCALE.
 4. Enter the number (total) of nodes the RadiantOne cluster should have. In the example shown below, there are currently 2 nodes in the RadiantOne cluster and another node is going to be added.
 <br>
-<img src="img/scalestatefulsets.jpg" alt="Scale Stateful Sets" style="height: 300px; width:500px;"/>
+<img src="../img/scalestatefulsets.jpg" alt="Scale Stateful Sets" style="height: 300px; width:500px;"/>
 <br>
  
 5. Click OK. Kubernetes adds the needed number of nodes. Once they are created, you can see the pods in Workloads -> Pods.
@@ -230,7 +230,7 @@ The default RadiantOne configuration assumes that clients accessing RadiantOne F
 
 From the Kubernetes web console, navigate to Discovery and Load Balancing -> Services. You can see the service name and port (LDAP port 2389 by default) in the section matching the label you defined for the RadiantOne deployment. An example is shown below.
 <br>
-<img src="img/lbservice.jpg" alt="Load Balancer Service" style="height: 400px; width:1000px;"/>
+<img src="../img/lbservice.jpg" alt="Load Balancer Service" style="height: 400px; width:1000px;"/>
 <br>
 
 #### Using Web Services (SCIM, DSML/SPML, REST)
@@ -260,23 +260,23 @@ The steps to apply a patch are outlined below.
 
 2. Click View/edit YAML.
 <br>
-<img src="img/edityaml.jpg" alt="Edit YAML" style="height: 200px; width:1000px;"/>
+<img src="../img/edityaml.jpg" alt="Edit YAML" style="height: 200px; width:1000px;"/>
 <br>
 
 3. Update the image version in the fid-aws.yaml file to indicate a newer patch version of RadiantOne. The location to update is shown in the image below, and indicates an example of v7.3.9.
 <br>
-<img src="img/editstatefulset.jpg" alt="Edit Stateful Set YAML" style="height: 300px; width:1000px;"/>
+<img src="../img/editstatefulset.jpg" alt="Edit Stateful Set YAML" style="height: 300px; width:1000px;"/>
 <br>
  
 Once the image is modified, the rolling update starts. This can take quite a bit of time to perform. Stateful sets are updated in order from the highest number to the lowest number. For three RadiantOne nodes, the fid-2 node is updated first, followed by the fid-1 node and finally the fid-0 node. The pod gets stopped and the latest image (indicated in the yaml file) is compared to the current version of RadiantOne on the node. If the current version is less than the version specified in the yaml, then the RadiantOne update process is executed on the node. This process is logged in the RadiantOne logs on the node. You can acces the logs from the Kubernetes web dashboard -> Workloads -> Pods -> <RadiantOne pod> by clicking LOGS.
 <br>
 <br>
-<img src="img/logs.jpg" alt="Logs" style="height: 75px; width:1000px;"/>
+<img src="../img/logs.jpg" alt="Logs" style="height: 75px; width:1000px;"/>
 <br>
  
 An example of the log is shown below.
 <br>
-<img src="img/logcontents.jpg" alt="Log Contents" style="height: 300px; width:1000px;"/>
+<img src="../img/logcontents.jpg" alt="Log Contents" style="height: 300px; width:1000px;"/>
 <br>
  
 {==Note – A backup of the existing install is made to vds-<version>.tar prior to updating.==}
@@ -289,14 +289,14 @@ To remove a deployment, delete the stateful sets, services, config maps, persist
 
 1. From the Kubernetes Control Panel -> Overview -> Stateful Sets section, click the 3 dots next to the RadiantOne FID stateful set (in the example shown below, this is the one named fid738) and choose Delete. Click Delete again to confirm the deletion.
 <br>
-<img src="img/deletestatefulset.jpg" alt="Delete Stateful Set" style="height: 300px; width:1000px;"/>
+<img src="../img/deletestatefulset.jpg" alt="Delete Stateful Set" style="height: 300px; width:1000px;"/>
 <br>
  
 2. From the Kubernetes Control Panel -> Overview -> Stateful Sets section, click the 3 dots next to the ZooKeeper stateful set (in the example shown above, this is the one named zk) and choose Delete. Click Delete again to confirm the deletion.
 
 3. From the Kubernetes Control Panel -> Overview -> Services section, click the 3 dots next to the RadiantOne Control Panel service (in the example shown below, this is the one named fid738-cp) and choose Delete. Click Delete again to confirm the deletion.
 <br>
-<img src="img/deletecpstatefulset.jpg" alt="Delete Control Panel Stateful Set" style="height: 350px; width:1000px;"/>
+<img src="../img/deletecpstatefulset.jpg" alt="Delete Control Panel Stateful Set" style="height: 350px; width:1000px;"/>
 <br>
 
 #### Delete Services  
@@ -309,7 +309,7 @@ To remove a deployment, delete the stateful sets, services, config maps, persist
 
 From the Kubernetes Control Panel -> Config and Storage -> Config Maps section, click the 3 dots next to the RadiantOne environment variables and choose Delete. Click Delete again to confirm the deletion.
 <br>
-<img src="img/deleteconfigmaps.jpg" alt="Delete Config Maps" style="height: 350px; width:1000px;"/>
+<img src="../img/deleteconfigmaps.jpg" alt="Delete Config Maps" style="height: 350px; width:1000px;"/>
 <br>
 
 #### Delete Persistent Volume Claims 
@@ -318,7 +318,7 @@ From the Kubernetes Control Panel -> Config and Storage -> Config Maps section, 
 
 2. Repeat the previous step to delete the persistent volume claims for all RadiantOne nodes and all ZooKeeper nodes.
 <br>
-<img src="img/deletepersistentvolumeclaims.jpg" alt="Delete Persistent Volume Claims" style="height: 350px; width:1000px;"/>
+<img src="../img/deletepersistentvolumeclaims.jpg" alt="Delete Persistent Volume Claims" style="height: 350px; width:1000px;"/>
 <br>
 
 #### Delete Persistent Volumes 
@@ -327,7 +327,7 @@ From the Kubernetes Control Panel -> Config and Storage -> Config Maps section, 
 
 2. Repeat step 1 for all persistent volumes associated with RadiantOne and ZooKeeper nodes.
 <br>
-<img src="img/deletepersistentvolumes.jpg" alt="Delete Persistent Volumes" style="height: 250px; width:1000px;"/>
+<img src="../img/deletepersistentvolumes.jpg" alt="Delete Persistent Volumes" style="height: 250px; width:1000px;"/>
 <br>
 
  
