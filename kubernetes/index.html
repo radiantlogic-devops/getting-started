@@ -1,0 +1,1340 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://devops.radiantlogic.com/kubernetes/">
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-8.5.10">
+    
+    
+      
+        <title>Kubernetes - Radiant Logic DevOps</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.975780f9.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.2505c338.min.css">
+        
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="None" data-md-color-accent="None">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#kubernetes" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Radiant Logic DevOps" class="md-header__button md-logo" aria-label="Radiant Logic DevOps" data-md-component="logo">
+      
+  <img src="../r1small.jpg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Radiant Logic DevOps
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Kubernetes
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7 0-.24-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91 1.61 0 2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08Z"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/radiantlogic-devops/getting-started" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    radiantlogic-devops/getting-started
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href=".." class="md-tabs__link">
+      Home
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../docker/" class="md-tabs__link">
+      Docker
+    </a>
+  </li>
+
+      
+        
+  
+  
+    
+  
+
+
+  <li class="md-tabs__item">
+    <a href="./" class="md-tabs__link md-tabs__link--active">
+      Kubernetes
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../helm/" class="md-tabs__link">
+      Helm
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../terraform/" class="md-tabs__link">
+      Terraform
+    </a>
+  </li>
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Radiant Logic DevOps" class="md-nav__button md-logo" aria-label="Radiant Logic DevOps" data-md-component="logo">
+      
+  <img src="../r1small.jpg" alt="logo">
+
+    </a>
+    Radiant Logic DevOps
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/radiantlogic-devops/getting-started" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    radiantlogic-devops/getting-started
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docker/" class="md-nav__link">
+        Docker
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Kubernetes
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Kubernetes
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#deployment" class="md-nav__link">
+    Deployment
+  </a>
+  
+    <nav class="md-nav" aria-label="Deployment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    Prerequisites
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#manifest-files" class="md-nav__link">
+    Manifest Files
+  </a>
+  
+    <nav class="md-nav" aria-label="Manifest Files">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#zookeeper" class="md-nav__link">
+    Zookeeper
+  </a>
+  
+    <nav class="md-nav" aria-label="Zookeeper">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#installation" class="md-nav__link">
+    Installation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validating-the-zookeeper-service" class="md-nav__link">
+    Validating the ZooKeeper Service
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#checking-the-zookeeper-service-via-http" class="md-nav__link">
+    Checking the ZooKeeper Service via HTTP
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#radiantone-nodes" class="md-nav__link">
+    RadiantOne Nodes
+  </a>
+  
+    <nav class="md-nav" aria-label="RadiantOne Nodes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#installation_1" class="md-nav__link">
+    Installation
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#radiantone-configuration" class="md-nav__link">
+    RadiantOne Configuration
+  </a>
+  
+    <nav class="md-nav" aria-label="RadiantOne Configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#radiantone-main-control-panel" class="md-nav__link">
+    RadiantOne Main Control Panel
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kubernetes-command-line-utility" class="md-nav__link">
+    Kubernetes Command Line Utility
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kubernetes-web-dashboard" class="md-nav__link">
+    Kubernetes Web Dashboard
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enabling-fips-mode" class="md-nav__link">
+    Enabling FIPS-Mode
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#migrating-configuration" class="md-nav__link">
+    Migrating Configuration
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#administration" class="md-nav__link">
+    Administration
+  </a>
+  
+    <nav class="md-nav" aria-label="Administration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#scaling-out-adding-radiantone-nodes" class="md-nav__link">
+    Scaling Out - Adding RadiantOne Nodes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#clients-connecting-to-radiantone-fid-nodes" class="md-nav__link">
+    Clients Connecting to RadiantOne FID Nodes
+  </a>
+  
+    <nav class="md-nav" aria-label="Clients Connecting to RadiantOne FID Nodes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#using-ldap" class="md-nav__link">
+    Using LDAP
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#using-web-services-scim-dsmlspml-rest" class="md-nav__link">
+    Using Web Services (SCIM, DSML/SPML, REST)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#applying-radiantone-patches" class="md-nav__link">
+    Applying RadiantOne Patches
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deleting-deployments" class="md-nav__link">
+    Deleting Deployments
+  </a>
+  
+    <nav class="md-nav" aria-label="Deleting Deployments">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#delete-stateful-sets" class="md-nav__link">
+    Delete Stateful Sets
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#delete-services" class="md-nav__link">
+    Delete Services
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#delete-config-maps" class="md-nav__link">
+    Delete Config Maps
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#delete-persistent-volume-claims" class="md-nav__link">
+    Delete Persistent Volume Claims
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#delete-persistent-volumes" class="md-nav__link">
+    Delete Persistent Volumes
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../helm/" class="md-nav__link">
+        Helm
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../terraform/" class="md-nav__link">
+        Terraform
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#deployment" class="md-nav__link">
+    Deployment
+  </a>
+  
+    <nav class="md-nav" aria-label="Deployment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    Prerequisites
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#manifest-files" class="md-nav__link">
+    Manifest Files
+  </a>
+  
+    <nav class="md-nav" aria-label="Manifest Files">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#zookeeper" class="md-nav__link">
+    Zookeeper
+  </a>
+  
+    <nav class="md-nav" aria-label="Zookeeper">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#installation" class="md-nav__link">
+    Installation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validating-the-zookeeper-service" class="md-nav__link">
+    Validating the ZooKeeper Service
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#checking-the-zookeeper-service-via-http" class="md-nav__link">
+    Checking the ZooKeeper Service via HTTP
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#radiantone-nodes" class="md-nav__link">
+    RadiantOne Nodes
+  </a>
+  
+    <nav class="md-nav" aria-label="RadiantOne Nodes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#installation_1" class="md-nav__link">
+    Installation
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#radiantone-configuration" class="md-nav__link">
+    RadiantOne Configuration
+  </a>
+  
+    <nav class="md-nav" aria-label="RadiantOne Configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#radiantone-main-control-panel" class="md-nav__link">
+    RadiantOne Main Control Panel
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kubernetes-command-line-utility" class="md-nav__link">
+    Kubernetes Command Line Utility
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kubernetes-web-dashboard" class="md-nav__link">
+    Kubernetes Web Dashboard
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enabling-fips-mode" class="md-nav__link">
+    Enabling FIPS-Mode
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#migrating-configuration" class="md-nav__link">
+    Migrating Configuration
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#administration" class="md-nav__link">
+    Administration
+  </a>
+  
+    <nav class="md-nav" aria-label="Administration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#scaling-out-adding-radiantone-nodes" class="md-nav__link">
+    Scaling Out - Adding RadiantOne Nodes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#clients-connecting-to-radiantone-fid-nodes" class="md-nav__link">
+    Clients Connecting to RadiantOne FID Nodes
+  </a>
+  
+    <nav class="md-nav" aria-label="Clients Connecting to RadiantOne FID Nodes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#using-ldap" class="md-nav__link">
+    Using LDAP
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#using-web-services-scim-dsmlspml-rest" class="md-nav__link">
+    Using Web Services (SCIM, DSML/SPML, REST)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#applying-radiantone-patches" class="md-nav__link">
+    Applying RadiantOne Patches
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deleting-deployments" class="md-nav__link">
+    Deleting Deployments
+  </a>
+  
+    <nav class="md-nav" aria-label="Deleting Deployments">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#delete-stateful-sets" class="md-nav__link">
+    Delete Stateful Sets
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#delete-services" class="md-nav__link">
+    Delete Services
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#delete-config-maps" class="md-nav__link">
+    Delete Config Maps
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#delete-persistent-volume-claims" class="md-nav__link">
+    Delete Persistent Volume Claims
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#delete-persistent-volumes" class="md-nav__link">
+    Delete Persistent Volumes
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  <a href="https://github.com/radiantlogic-devops/getting-started/edit/master/docs/kubernetes.md" title="Edit this page" class="md-content__button md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
+  </a>
+
+
+<h1 id="kubernetes">Kubernetes</h1>
+<p>You can use Kubernetes to orchestrate the configuration and deployment of RadiantOne. Radiant Logic provides DevOps images for deployments on cloud platforms such as Amazon Web Services (AWS) using Amazon Elastic Kubernetes Service (EKS) and Microsoft Azure Kubernetes Service (AKS).</p>
+<h2 id="deployment">Deployment</h2>
+<h3 id="prerequisites">Prerequisites</h3>
+<p>Before deploying RadiantOne, you should already be familiar with Kubernetes Pods, Services and StatefulSets. See the <a href="https://kubernetes.io/docs/concepts/">Kubernetes Documentation</a> for details. You should also be familiar with Kubernetes kubectl commands. See the <a href="https://kubernetes.io/docs/reference/kubectl/cheatsheet/">Kubernetes Cheat Sheet</a> for details.</p>
+<p>In addition, you should:</p>
+<ol>
+<li>
+<p>Have a supported Kubernetes cluster running in the cloud. A commonly deployed Kubernetes cluster is <a href="https://docs.aws.amazon.com/eks/latest/APIReference/API_CreateCluster.html">Amazon Elastic Kubernetes Service</a>. 
+For a highly available architecture, the underlying Kubernetes cluster should support at least two pods running RadiantOne nodes and three pods running ZooKeeper. 
+<br>
+<br>
+<mark class="critic">Note - Kubernetes v1.18+ is required. The pods running RadiantOne nodes need at least 2 CPUs and 4 GiB memory. The pods running ZK need at least 2 CPUs and 2 GiB memory.</mark><br></p>
+</li>
+<li>
+<p>Install and configure the Kubernetes kubectl command-line tool on the machine where you will manage the Kubernetes cluster from.  This utility controls the Kubernetes Cluster. An example is <a href="https://docs.aws.amazon.com/cli/latest/userguide/install-windows.html">AWS CLI</a>.</p>
+</li>
+<li>
+<p>Have a RadiantOne configuration exported from a Linux Dev/QA environment. After installing RadiantOne in the Kubernetes cluster, you can import the configuration and make any needed configuration updates from the RadiantOne Main Control Panel or from command line using the vdsconfig utility.</p>
+</li>
+</ol>
+<h3 id="manifest-files">Manifest Files</h3>
+<p>Download the StatefulSet manifests: configmap.yaml, fid-aws.yaml and zk-aws.yaml, on the machine where you will manage the Kubernetes cluster from. Contact Radiant Logic at <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#64;&#114;&#97;&#100;&#105;&#97;&#110;&#116;&#108;&#111;&#103;&#105;&#99;&#46;&#99;&#111;&#109;">&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#64;&#114;&#97;&#100;&#105;&#97;&#110;&#116;&#108;&#111;&#103;&#105;&#99;&#46;&#99;&#111;&#109;</a> for access to these files. </p>
+<h4 id="zookeeper">Zookeeper</h4>
+<p>The StatefulSet manifest, zk-aws.yaml, creates a ZooKeeper cluster that consists of three Pods by default. Although the Kubernetes web console can be used to create new stateful sets, the steps below leverage the kubectl command line tool. Perform the following steps on the machine where you have downloaded the kubectl command line utilty and saved the yaml files.</p>
+<h5 id="installation">Installation</h5>
+<ol>
+<li>Update zk-aws.yaml file if necessary. 
+You can modify the ZooKeeper ports, number of nodes (ZOOKEEPER_FLEET_SIZE) in the ensemble (3 is the default, but you can make it 5 if needed), name of the Kubernetes service linked to the ZooKeeper nodes (make sure this matches what is defined in the configmap.yaml).
+<br>
+<mark class="critic">Note – Do not use “TABS” for spacing in the .yaml file.  Use the space bar to indent as needed.</mark>
+<br></li>
+<li>
+<p>Open a command prompt and navigate to the location where you have installed the kubectl command line tool. </p>
+</li>
+<li>
+<p>Create the ZooKeeper StatefulSet from the zk.yaml. Indicate the path to the ZooKeeper yaml file. In the example shown below, it is located in the same location at the kubectl tool.
+<div class="highlight"><pre><span></span><code>kubectl --namespace=prod apply -f zk-aws.yaml
+</code></pre></div>
+<br>
+<mark class="critic">Note – if no namespace is used in the Kubernetes cluster, you can omit the
+--namespace property.</mark>
+<br></p>
+</li>
+</ol>
+<h5 id="validating-the-zookeeper-service">Validating the ZooKeeper Service</h5>
+<p>Before installing RadiantOne nodes, make sure the ZooKeeper service is running. There should be one leader node and two follower nodes (if you kept the default fleet size of 3). The steps in this section describe how to do this from the Kubernetes cluster web dashboard.</p>
+<ol>
+<li>From the Kubernetes web dashboard, navigate to Workloads -&gt; Stateful Sets.</li>
+<li>Click the Stateful Set corresponding to your ZooKeeper deployment.</li>
+<li>In the Pods section, click zk-0 (in this example the name used in the ZooKeeper yaml is “zk”).
+<br>
+<img src="../img/kubernetesdashboard.jpg" alt="Kubernetes Dashboard" style="height: 250px; width:1000px;"/>
+<br></li>
+<li>Click -&gt;EXEC, this opens a new browser window.</li>
+<li>
+<p>In the SHELL window, run this command: 
+<br>
+<div class="highlight"><pre><span></span><code>export JAVA_HOME=/opt/radiantone/rli-zookeeper-external/jdk/jre/;/opt/radiantone/rli-zookeeper-external/zookeeper/bin/zkServer.sh status
+</code></pre></div>
+<br>
+<mark class="critic">Note - Use Shift+Insert to Paste.</mark><br><br>
+The returned value should indicate “Mode: follower” or “Mode: Leader”. The ZooKeeper in the following example is a follower node.
+<br>
+<img src="../img/followerzk.jpg" alt="Follower ZK Node" style="height: 150px; width:1000px;"/>
+<br></p>
+</li>
+<li>
+<p>Close the Browser tab and go back to the Kubernetes Dashboard.</p>
+</li>
+<li>Repeat steps 3-6 for the other ZooKeeper nodes: zk-1 and zk-2. Following this example, one should be a follower node and one should be a leader node. The results are shown below.
+<br>
+<img src="../img/followerzk2.jpg" alt="Follower ZK Node 2" style="height: 150px; width:1000px;"/>
+<br>
+<img src="../img/leaderzk.jpg" alt="Leader ZK Node" style="height: 125px; width:1000px;"/>
+<br></li>
+</ol>
+<h5 id="checking-the-zookeeper-service-via-http">Checking the ZooKeeper Service via HTTP</h5>
+<p>In the example commands used in this section, the ZooKeeper service is named “myzk” and the shell is launched for the pod named myzk-2.
+Run the following to see the commands available:
+<div class="highlight"><pre><span></span><code>curl http://myzk:8080/commands
+</code></pre></div></p>
+<p>A couple of examples are shown below.
+<br>
+When “ruok” returns “error” : null, this means the ZooKeeper node is running fine. 
+<br>
+When “is_read_only” returns “read_only” : false, this means the ZooKeeper node is not in a read-only state. If a ZooKeeper node is in a read-only state, something is wrong and the RadiantOne nodes will not allow any write operations during this time. Most likely ZooKeeper has lost the quorum and can’t communicate with more than half of the other ZooKeeper nodes.
+<br>
+<img src="../img/zookeepercheck.jpg" alt="ZooKeeper State Check" style="height: 150px; width:500px;"/>
+<br></p>
+<h4 id="radiantone-nodes">RadiantOne Nodes</h4>
+<p>The StatefulSet manifests (configmap.yaml and fid.yaml) create a RadiantOne node. After the node is deployed, you can scale up the number of nodes as needed. Although the Kubernetes web console can be used to create new stateful sets, the steps below leverage the kubectl command line tool. Perform the following steps on the machine where you have downloaded the kubectl command line utilty and saved the yaml files.</p>
+<h5 id="installation_1">Installation</h5>
+<ol>
+<li>Update the <a href="../configmapyaml/">configmap.yaml</a> file.</li>
+<li>Update the <a href="../fidyaml/">fid-aws.yaml</a> file.</li>
+<li>Open a command prompt and navigate to the location where you installed the kubectl command line utilty.</li>
+<li>To create the RadiantOne FID StatefulSet, you can reference the folder that contains both the configmap.yaml and fid-aws.yaml files. Assuming both of these files are located in a folder located at C:\Kubernetes\FID, the following command can be used.
+<div class="highlight"><pre><span></span><code>kubectl --namespace=prod apply -f C:\Kubernetes\FID
+</code></pre></div>
+<mark class="critic">Note – if no namespace is used in your Kubernetes cluster, you can omit the --namespace property.</mark></li>
+</ol>
+<h2 id="radiantone-configuration">RadiantOne Configuration</h2>
+<p>The configuration can be managed from the RadiantOne Main Control Panel, kubectl command line utility, or from the Kubernetes web dashboard by launching a shell directly on the RadiantOne node/pod you want to administer.</p>
+<h3 id="radiantone-main-control-panel">RadiantOne Main Control Panel</h3>
+<p>After the RadiantOne nodes are deployed, you can view the services from the Kubernetes web dashboard and click on the link to launch the Main Control Panel.</p>
+<ol>
+<li>
+<p>From the Kubernetes web dashboard, navigate to Discovery and Load Balancing -&gt; Services.
+<br>
+<img src="../img/kubernetesservices.jpg" alt="Kubernetes Services" style="height: 350px; width:1000px;"/>
+<br>
+The external endpoints, which point to the AWS Elastic Load Balancer (ELB) that is in front of the RadiantOne services, are shown for the RadiantOne Control Panel service 
+(<node_name>-cp). There are four external endpoints configured. Two point to the Control Panel (one is for the non-ssl port and the other is for the ssl port). Two point to the RadiantOne FID web services (SCIM, DSML/SPML, ADAP) ports which are required by the RadiantOne Main Control Panel -&gt; Directory Browser tab. </p>
+</li>
+<li>
+<p>Hover over the endpoint to see the server and port. Click the link to launch the RadiantOne Main Control Panel (the one with either port 7070 for HTTP access or 7171 for HTTPS access)</p>
+</li>
+<li>
+<p>Login with the RadiantOne administrator. The credentials were defined in the configmap.yaml file.</p>
+</li>
+<li>Manage the RadiantOne configuration as needed. For an understanding of activities that can be performed from the Main Control Panel, see the RadiantOne System Administration Guide.</li>
+</ol>
+<h3 id="kubernetes-command-line-utility">Kubernetes Command Line Utility</h3>
+<p>The Kubernetes command line utility can be used to run commands available in RadiantOne. Below are a few examples of how to run some common commands. For details on all available commands, see the RadiantOne Command Line Configuration Guide.</p>
+<ul>
+<li>Example 1 - Backing up an HDAP store mounted at o=local on the myfid-0 pod in the demo namespace:
+<div class="highlight"><pre><span></span><code>kubectl exec -it -n demo myfid-0 -- vdsconfig.sh backup-hdapstore -namingcontext o=local
+</code></pre></div></li>
+<li>Example 2 - Restore an HDAP store mounted at o=local on the myfid-0 pod in the demo namespace:
+<div class="highlight"><pre><span></span><code>kubectl exec -it -n demo myfid-0 -- vdsconfig.sh restore-hdapstore -namingcontext o=local 
+</code></pre></div></li>
+<li>Example 3 – Export entries from an HDAP store mounted at o=local on the myfid-0 pod in the demo namespace. 
+<div class="highlight"><pre><span></span><code>kubectl exec -it -n demo myfid-0 -- vdsconfig.sh export-ldif -basedn o=local -ldif local.ldif -scope sub
+</code></pre></div>
+The local.ldif file is created at /opt/radiantone/vds/vds_server/ldif/export/ by default.
+<br>
+<img src="../img/ldifexport.jpg" alt="LDIF Export Example" style="height: 150px; width:600px;"/>
+<br></li>
+</ul>
+<h3 id="kubernetes-web-dashboard">Kubernetes Web Dashboard</h3>
+<p>To access the shell from the Kubernetes web dashboard:</p>
+<ol>
+<li>
+<p>Go to Workloads -&gt; Pods.</p>
+</li>
+<li>
+<p>Select the RadiantOne pod you want to manage (e.g. myfid-0) and click -&gt;EXEC. The shell window opens.
+<br>
+<img src="../img/fidnode.jpg" alt="FID Node" style="height: 300px; width:1000px;"/>
+<br> </p>
+</li>
+<li>Go to the /vds folder to access the file system of RadiantOne. The example below depicts how to navigate to the log files below /vds/vds_server/logs.
+<br>
+<img src="../img/r1filesystem.jpg" alt="RadiantOne File System" style="height: 150px; width:1000px;"/>
+<br> </li>
+</ol>
+<h3 id="enabling-fips-mode">Enabling FIPS-Mode</h3>
+<p>If your RadiantOne deployment must support FIPS 140-2 certified crypto operations for data-in-transit and data-at-rest, perform the following before enabling FIPS-mode.
+Modify the file <RLI_HOME>/jdk/jre/lib/security/java.security and replace this line:
+<div class="highlight"><pre><span></span><code>securerandom.source=file:/dev/random
+</code></pre></div>
+With this line:
+<div class="highlight"><pre><span></span><code>securerandom.source=file:/dev/urandom
+</code></pre></div></p>
+<h3 id="migrating-configuration">Migrating Configuration</h3>
+<p>RadiantOne configuration can be migrated from one environment (e.g. dev/qa) to another (e.g. production). This section describes the migration steps.</p>
+<ol>
+<li>Download the RadiantOne Migration Utility onto the machine where the RadiantOne configuration is to be exported. Run the following command to export the configuration.
+<div class="highlight"><pre><span></span><code>./opt/MigrationUtility/radiantone-migration-tool-2.0.5/migrate.sh export ./opt/temp/export.zip
+</code></pre></div></li>
+<li>Copy the file to the target machine where the kubectl utility is installed. </li>
+<li>Scale down the RadiantOne cluster to one node. From the Kubernetes web dashboard, go to Workloads -&gt; Stateful Sets.</li>
+<li>Select the RadiantOne FID stateful set.
+<br>
+<mark class="critic">Note – make sure you are in the correct Namespace!</mark>
+<br></li>
+<li>Click SCALE.</li>
+<li>
+<p>Enter 1 for the (total) number of nodes the RadiantOne cluster should have. In the example shown below, there are currently 3 nodes in the RadiantOne cluster and 1 node is desired.
+<br>
+<img src="../img/scaledown.jpg" alt="Scale Down" style="height: 300px; width:500px;"/>
+<br> </p>
+</li>
+<li>
+<p>Click OK. Kubernetes scales down to one node.
+<br>
+<mark class="critic">Note – you must scale down instead of just stopping the RadiantOne services on the nodes. Stopping the services would result in Kubernetes trying to restart them.  By default, when Kubernetes scales down the nodes, they still remain a part of the cluster. If you run cluster.sh list, you still see the nodes, but the RadiantOne services will not be running. This way, Kubernetes does not try to restart the RadiantOne services automatically.</mark>
+<br></p>
+</li>
+<li>From the machine where the kubectl utility is installed, copy the file that was exported from the dev/qa environment to the RadiantOne leader node (the example below has a RadiantOne node identified as fid-0 in the demo namespace).
+<div class="highlight"><pre><span></span><code>kubectl cp export.zip fid-0:/opt/radiantone -n demo
+</code></pre></div></li>
+<li>
+<p>(Optional) If you want to customize additional configuration changes to be executed after the initial configuration is imported, create a script named <a href="../postmigrationscript/">configure_fid.sh</a> that contains the needed commands (e.g. update host information in data sources to point to production instances). This script is executed by the migration process after the initial configuration is imported (in step #10 below).</p>
+</li>
+<li>
+<p>From the machine where the kubectl utility is installed, run the import command on the target pod.
+<div class="highlight"><pre><span></span><code>kubectl exec -it fid-0 -n demo -- ./migrate.sh import export.zip
+</code></pre></div>
+The migrate script stops the RadiantOne services on the target pod, and then restarts them after import. </p>
+</li>
+<li>
+<p>Scale up the RadiantOne nodes from the Kubernetes web dashboard -&gt; Workloads -&gt; Stateful Sets.</p>
+</li>
+</ol>
+<h2 id="administration">Administration</h2>
+<h3 id="scaling-out-adding-radiantone-nodes">Scaling Out - Adding RadiantOne Nodes</h3>
+<p>Scaling out means adding RadiantOne nodes to the cluster. You cannot scale out ZooKeeper nodes. The number of pods to be created is explicitly defined when the cluster is created (ZOOKEEPER_FLEET_SIZE). However, you can scale out RadiantOne nodes. 
+To add nodes to the existing RadiantOne FID cluster:</p>
+<ol>
+<li>From the Kubernetes web dashboard, go to Workloads -&gt; Stateful Sets.</li>
+<li>
+<p>Select the RadiantOne FID stateful set.
+<br>
+<mark class="critic">Note – make sure you are in the correct Namespace!</mark>
+<br>
+<img src="../img/statefulsets.jpg" alt="Stateful Sets" style="height: 400px; width:1000px;"/>
+<br></p>
+</li>
+<li>
+<p>Click  SCALE.</p>
+</li>
+<li>
+<p>Enter the number (total) of nodes the RadiantOne cluster should have. In the example shown below, there are currently 2 nodes in the RadiantOne cluster and another node is going to be added.
+<br>
+<img src="../img/scalestatefulsets.jpg" alt="Scale Stateful Sets" style="height: 300px; width:500px;"/>
+<br></p>
+</li>
+<li>
+<p>Click OK. Kubernetes adds the needed number of nodes. Once they are created, you can see the pods in Workloads -&gt; Pods.</p>
+</li>
+</ol>
+<h3 id="clients-connecting-to-radiantone-fid-nodes">Clients Connecting to RadiantOne FID Nodes</h3>
+<h4 id="using-ldap">Using LDAP</h4>
+<p>The default RadiantOne configuration assumes that clients accessing RadiantOne FID are managed by the same Kubernetes cluster and will use an internal service to query RadiantOne FID as opposed to an externally facing ELB. This is dictated by the <code>type: NodePort</code> keyword in the .yaml file that describes the RadiantOne FID LDAP ports. </p>
+<p><mark class="critic">Note - If you changed the .yaml file prior to deploying, and set <code>type: LoadBalancer</code>, then clients would access RadiantOne FID via LDAP through an Elastic Load Balancer (ELB).</mark></p>
+<p>From the Kubernetes web console, navigate to Discovery and Load Balancing -&gt; Services. You can see the service name and port (LDAP port 2389 by default) in the section matching the label you defined for the RadiantOne deployment. An example is shown below.
+<br>
+<img src="../img/lbservice.jpg" alt="Load Balancer Service" style="height: 400px; width:1000px;"/>
+<br></p>
+<h4 id="using-web-services-scim-dsmlspml-rest">Using Web Services (SCIM, DSML/SPML, REST)</h4>
+<p>From the Kubernetes web dashboard, navigate to Discovery and Load Balancing -&gt; Services.</p>
+<p>The external endpoints, which point to the AWS Elastic Load Balancer (ELB) that is in front of the RadiantOne services, are shown. There are four external endpoints configured. Two point to the Control Panel (one is for the non-ssl port and the other is for the ssl port). Two point to the RadiantOne web services (SCIM, DSML/SPML, REST/ADAP) ports. Hover over the endpoint to see the server and port. Give this information to clients to connect to RadiantOne on the web services ports. </p>
+<p><mark class="critic">Note - You can map the ELB endpoint to a friendly DNS name by creating a Hosted Zone in AWS.</mark></p>
+<h3 id="applying-radiantone-patches">Applying RadiantOne Patches</h3>
+<p>Patching a version of RadiantOne is classified as an update. Patch versions are identified by the 3rd number in the whole version. For example, v7.3.10 indicates it is the 10th patch release for v7.3. 
+You can apply a patch, and update to a newer patch release (e.g. apply a patch on v7.3.10 to update to v7.3.11). </p>
+<p>Patches are not for upgrading to a new version (e.g. moving from v7.3 to v7.4), or moving from a newer patch release to an older patch release (e.g. moving from v7.3.10 to v7.3.8).</p>
+<p>The following requirements must be met in order to update/patch the RadiantOne version on the RadiantOne nodes:</p>
+<ul>
+<li>The ZooKeeper ensemble must be reachable and not in a read-only state.</li>
+<li>There must be at least two nodes in the RadiantOne cluster. The process performs a rolling update where each RadiantOne node is updated at a time. While one RadiantOne node is being updated, the other node must be available to serve client requests. </li>
+<li>Although a rolling update does not require the complete RadiantOne service to be offline (at least one node should always be available), throughput will be reduced as nodes are being updated. Therefore, it is recommended that you patch during maintenance windows/non-peak hours.
+When a container is started, it pulls the image specified in the yaml file and Kubernetes checks the version that is installed. If the current version is less than the version outlined in the yaml file, it knows that the image needs to be updated.  In this case, the update.sh file is run and one RadiantOne node is updated at a time. </li>
+</ul>
+<p>The steps to apply a patch are outlined below.</p>
+<ol>
+<li>
+<p>From the Kubernetes web dashboard -&gt; Workloads -&gt; Stateful Sets, click the 3 dots next to the one representing the RadiantOne node. </p>
+</li>
+<li>
+<p>Click View/edit YAML.
+<br>
+<img src="../img/edityaml.jpg" alt="Edit YAML" style="height: 200px; width:1000px;"/>
+<br></p>
+</li>
+<li>
+<p>Update the image version in the fid-aws.yaml file to indicate a newer patch version of RadiantOne. The location to update is shown in the image below, and indicates an example of v7.3.9.
+<br>
+<img src="../img/editstatefulset.jpg" alt="Edit Stateful Set YAML" style="height: 300px; width:1000px;"/>
+<br></p>
+</li>
+</ol>
+<p>Once the image is modified, the rolling update starts. This can take quite a bit of time to perform. Stateful sets are updated in order from the highest number to the lowest number. For three RadiantOne nodes, the fid-2 node is updated first, followed by the fid-1 node and finally the fid-0 node. The pod gets stopped and the latest image (indicated in the yaml file) is compared to the current version of RadiantOne on the node. If the current version is less than the version specified in the yaml, then the RadiantOne update process is executed on the node. This process is logged in the RadiantOne logs on the node. You can acces the logs from the Kubernetes web dashboard -&gt; Workloads -&gt; Pods -&gt; <RadiantOne pod> by clicking LOGS.
+<br>
+<br>
+<img src="../img/logs.jpg" alt="Logs" style="height: 75px; width:1000px;"/>
+<br></p>
+<p>An example of the log is shown below.
+<br>
+<img src="../img/logcontents.jpg" alt="Log Contents" style="height: 300px; width:1000px;"/>
+<br></p>
+<p><mark class="critic">Note – A backup of the existing install is made to vds-<version>.tar prior to updating.</mark></p>
+<h3 id="deleting-deployments">Deleting Deployments</h3>
+<p>To remove a deployment, delete the stateful sets, services, config maps, persistent volumes, and persistent volume claims.</p>
+<h4 id="delete-stateful-sets">Delete Stateful Sets</h4>
+<ol>
+<li>
+<p>From the Kubernetes Control Panel -&gt; Overview -&gt; Stateful Sets section, click the 3 dots next to the RadiantOne FID stateful set (in the example shown below, this is the one named fid738) and choose Delete. Click Delete again to confirm the deletion.
+<br>
+<img src="../img/deletestatefulset.jpg" alt="Delete Stateful Set" style="height: 300px; width:1000px;"/>
+<br></p>
+</li>
+<li>
+<p>From the Kubernetes Control Panel -&gt; Overview -&gt; Stateful Sets section, click the 3 dots next to the ZooKeeper stateful set (in the example shown above, this is the one named zk) and choose Delete. Click Delete again to confirm the deletion.</p>
+</li>
+<li>
+<p>From the Kubernetes Control Panel -&gt; Overview -&gt; Services section, click the 3 dots next to the RadiantOne Control Panel service (in the example shown below, this is the one named fid738-cp) and choose Delete. Click Delete again to confirm the deletion.
+<br>
+<img src="../img/deletecpstatefulset.jpg" alt="Delete Control Panel Stateful Set" style="height: 350px; width:1000px;"/>
+<br></p>
+</li>
+</ol>
+<h4 id="delete-services">Delete Services</h4>
+<ol>
+<li>
+<p>From the Kubernetes Control Panel -&gt; Overview -&gt; Services section, click the 3 dots next to the RadiantOne FID service (in the example shown above, this is the one named fid738) and choose Delete. Click Delete again to confirm the deletion.</p>
+</li>
+<li>
+<p>From the Kubernetes Control Panel -&gt; Overview -&gt; Services section, click the 3 dots next to the ZooKeeper service (in the example shown above, this is the one named zk) and choose Delete. Click Delete again to confirm the deletion.</p>
+</li>
+</ol>
+<h4 id="delete-config-maps">Delete Config Maps</h4>
+<p>From the Kubernetes Control Panel -&gt; Config and Storage -&gt; Config Maps section, click the 3 dots next to the RadiantOne environment variables and choose Delete. Click Delete again to confirm the deletion.
+<br>
+<img src="../img/deleteconfigmaps.jpg" alt="Delete Config Maps" style="height: 350px; width:1000px;"/>
+<br></p>
+<h4 id="delete-persistent-volume-claims">Delete Persistent Volume Claims</h4>
+<ol>
+<li>
+<p>In the Config and Storage -&gt; Persistent Volume Claims section, click the 3 dots next to the RadiantOne persistent volume claim and choose Delete. Click Delete again to confirm the deletion.</p>
+</li>
+<li>
+<p>Repeat the previous step to delete the persistent volume claims for all RadiantOne nodes and all ZooKeeper nodes.
+<br>
+<img src="../img/deletepersistentvolumeclaims.jpg" alt="Delete Persistent Volume Claims" style="height: 350px; width:1000px;"/>
+<br></p>
+</li>
+</ol>
+<h4 id="delete-persistent-volumes">Delete Persistent Volumes</h4>
+<ol>
+<li>
+<p>In the Cluster -&gt; Persistent Volumes section, identify all of the nodes associated with the persistent volume. The value in the claim column is prefixed with the name of the namespace (e.g. demo/). Click the 3 dots next to the RadiantOne node associated with the persistent volume (it should have Status=Released) and choose Delete. Click Delete again to confirm the deletion.</p>
+</li>
+<li>
+<p>Repeat step 1 for all persistent volumes associated with RadiantOne and ZooKeeper nodes.
+<br>
+<img src="../img/deletepersistentvolumes.jpg" alt="Delete Persistent Volumes" style="height: 250px; width:1000px;"/>
+<br></p>
+</li>
+</ol>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+          <a href="#" class="md-top md-icon" data-md-component="top" hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            Back to top
+          </a>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+        
+        <a href="../docker/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Docker" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Docker
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../helm/" class="md-footer__link md-footer__link--next" aria-label="Next: Helm" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Helm
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2022 Radiant Logic, Inc.
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.sections", "navigation.top", "navigation.tabs", "search.highlight", "search.share", "search.suggest"], "search": "../assets/javascripts/workers/search.16e2a7d4.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.5a2dcb6a.min.js"></script>
+      
+    
+    
+  </body>
+</html>
