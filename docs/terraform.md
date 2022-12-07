@@ -1,20 +1,20 @@
-# **FID on EKS using Terraform**
+# FID on EKS using Terraform
 
 
-## **EKS**
+## EKS
 
-**Amazon Elastic Kubernetes service** is a managed Kubernetes service provided by AWS. EKS is a certified Kubernetes Conformant, so existing applications that run in Kubernetes are compatible with EKS. Amazon EKS automatically manages the availability and scalability of the Kubernetes control plane nodes and also provides advantages like performance, scaling, reliability and, availability
+Amazon Elastic Kubernetes service is a managed Kubernetes service provided by AWS. EKS is a certified Kubernetes Conformant, so existing applications that run in Kubernetes are compatible with EKS. Amazon EKS automatically manages the availability and scalability of the Kubernetes control plane nodes and also provides advantages like performance, scaling, reliability and, availability
 Integration with other AWS services like networking, security, IAM and, VPC is also supported making EKS suitable for cloud applications and services.
 
 Learn more about EKS [here](https://docs.aws.amazon.com/eks/latest/userguide/what-is-eks.html)
 
 
-## **Terraform**
+## Terraform
 
 Terraform is an open-source infrastructure as code software tool that provides a consistent CLI workflow to manage hundreds of cloud services. Terraform codifies cloud APIs into declarative configuration files.
 Terraform must be installed, refer to [documentation](https://learn.hashicorp.com/tutorials/terraform/install-cli) for more details.
 
-## **Prerequisites**
+## Prerequisites
 
 1. Terraform (terraform CLI)
 2. [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) configured
@@ -23,11 +23,11 @@ Terraform must be installed, refer to [documentation](https://learn.hashicorp.co
 5. [Helm](https://helm.sh/docs/intro/install/) installed (optional)
 
 
-## **Deployment**
+## Deployment
 
 Terraform connects to AWS using the configuration details provided (either through a tfvars file or configured in the cli where terraform commands will be run) to deploy the necessary resources in a highly configurable manner 
 
-### **Components that will be created and deployed**
+### Components that will be created and deployed
 
 1. VPC
 2. Subnets
@@ -42,7 +42,7 @@ Terraform connects to AWS using the configuration details provided (either throu
 ### NOTE: Navigate to the location where you have either cloned or downloaded the terraform files.
 
 
-### **Terraform INIT**
+### Terraform INIT
 
 The [terraform init](https://www.terraform.io/cli/commands/init) command is used to initialize a working directory containing Terraform configuration files.
 This is the first command that should be run after writing a new Terraform configuration or cloning an existing one from version control.
@@ -54,7 +54,7 @@ Initialize terraform
 terraform init [options]
 ```
 
-### **Terraform VALIDATE**
+### Terraform VALIDATE
 
 The [terraform validate](https://www.terraform.io/cli/commands/validate) command validates the configuration files in a directory, referring only to the configuration and not accessing any remote services such as remote state, provider APIs, etc.
 
@@ -64,7 +64,7 @@ Validate the terraform configuration and existing file
 terraform validate [options]
 ```
 
-### **Terraform PLAN**
+### Terraform PLAN
 
 The terraform plan command creates an execution plan. By default, creating a plan consists of:
 
@@ -78,7 +78,7 @@ Create the execution file
 terraform plan [options]
 ```
 
-### **Terraform APPLY**
+### Terraform APPLY
 
 The [terraform apply](https://www.terraform.io/docs/cli/commands/apply.html) command executes the actions proposed in a Terraform plan.
 
@@ -92,7 +92,7 @@ Apply the execution (plan file) file created
 terraform apply [options] [plan file]
 ```
 
-### **Terraform DESTROY**
+### Terraform DESTROY
 
 The [terraform destroy](https://www.terraform.io/docs/cli/commands/destroy.html) command is a convenient way to destroy all remote objects managed by a particular Terraform configuration.
 
@@ -104,7 +104,7 @@ terraform destroy [options]
 
 
 
-## **REQUIREMENTS**
+## REQUIREMENTS
 
 | Name | Version |
 | - | - |
@@ -113,7 +113,7 @@ terraform destroy [options]
 
 
 
-## **PROVIDERS**
+## PROVIDERS
 
 | Name | Version |
 | - | - |
@@ -121,7 +121,7 @@ terraform destroy [options]
 | helm |   |
 
 
-## **INPUTS**
+## INPUTS
 
 | Name | Description |
 | - | - |
@@ -147,16 +147,9 @@ terraform destroy [options]
 | private_subnet_tags| Additional tags for the private subnets
 | application_name| Name of the application
 | application_name2|
-|
-|
-|
-|
 
 
-
-
-## **OUTPUTS**
-
+## OUTPUTS
 
 | Name | Description |
 | - | - |
@@ -169,14 +162,4 @@ terraform destroy [options]
 |cluster_name|Kubernetes Cluster Name
 |vpc_resource_level_tags| tags
 |vpc_all_tags| tags
-
-
-
-
- 
-
-
-
-
-
 
